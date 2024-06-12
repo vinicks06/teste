@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="1.js"></script>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Minha Biblioteca</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar...">
+            <button class="btn search-btn" onclick="searchTable()">Buscar</button>
+        </div>
+    <button class="btn add-btn" onclick="adicionar()">+</button>
+    <table id="dataTable" class="data-table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Lançamento</th>
+                <th>Página marcada</th>
+                <th>Gênero</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Conteúdo da tabela será adicionado aqui -->
+        </tbody>
+    </table>
+</div>
+
+    <script>
+        // Função para carregar dados da tabela do localStorage e adicioná-los à tabela HTML
+        function addRowsToTable() {
+            // Obtém os dados armazenados no localStorage
+            var tableData = JSON.parse(localStorage.getItem('tableData')) || [];
+
+            // Ordena os dados alfabeticamente pelo título
+            tableData.sort((a, b) => a.input1.localeCompare(b.input1));
+            
+            // Seleciona o corpo da tabela (tbody)
+            var table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+
+            // Para cada dado armazenado, cria uma nova linha na tabela
+            tableData.forEach((data, index) => {
+                var newRow = table.insertRow();
+                newRow.setAttribute('data-index', index);
+
+                // Insere células na nova linha
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+
+                // Preenche as células com os dados correspondentes
+                cell1.innerHTML = data.input1;
+                cell2.innerHTML = data.input2;
+                cell3.innerHTML = data.input3;
+                cell4.innerHTML = data.input4;
+                cell5.innerHTML = data.input5;
+
+                // Adiciona um evento de clique à nova linha que chama a função remover
+                newRow.addEventListener('click', function() {
+                    remover(newRow);
+                });
+            });
+        }
+
+        // Função para remover uma linha da tabela e atualizar o localStorage
+        function remover(row) {
+            // Obtém o índice da linha a ser removida
+            var index = row.getAttribute('data-index');
+
+            // Obtém os dados armazenados no localStorage
+            var tableData = JSON.parse(localStorage.getItem('tableData')) || [];
+
+            // Remove o dado correspondente ao índice
+            tableData.splice(index, 1);
+            // Atualiza o localStorage com os dados restantes
+            localStorage.setItem('tableData', JSON.stringify(tableData));
+
+            // Remove a linha da tabela HTML
+            document.getElementById("dataTable").getElementsByTagName('tbody')[0].removeChild(row);
+
+            // Re-indexa as linhas restantes para manter a consistência
+            var rows = document.getElementById("dataTable").getElementsByTagName('tbody')[0].rows;
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].setAttribute('data-index', i);
+            }
+        }
+
+        // Chama a função ao carregar a página
+        window.onload = addRowsToTable;
+    </script>
+</body>
+</html>

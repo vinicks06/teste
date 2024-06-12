@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <link rel="stylesheet" href="2.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário</h1>
+        <hr>
+        <label for="nome">Nome:</label>
+        <br>
+        <input type="text" name="nome" id="userNome">
+        <br>
+        <label for="email">Email:</label>
+        <br>
+        <input type="text" name="email" id="userEmail">
+        <br>
+        <label>Qual seu idioma:</label>
+        <br>
+        <select id="userIdioma">
+            <option value="">Selecione...</option>
+            <option>Inglês</option>
+            <option>Espanhol</option>
+            <option>Françes</option>
+            <option>Português</option>
+            <option>Outro</option>
+        </select>
+        <br>
+        <label for="homem">Homem</label>
+        <input type="checkbox" id="userHomem">
+        <label for="mulher">Mulher</label>
+        <input type="checkbox" id="userMulher">
+        <br>
+        <label for="genero">Gênero de livro favorito:</label>
+        <br>
+        <select id="userGenero">
+            <option value="">Selecione...</option>
+            <option>Ficção Literária</option>
+            <option>Ficção Científica</option>
+            <option>Fantasia</option>
+            <option>Mistério/Thriller</option>
+            <option>Romance</option>
+            <option>Não Ficção</option>
+            <option>Drama</option>
+            <option>Horror</option>
+        </select>
+        <br>
+        <button onclick="verificarCampos()">Enviar</button>
+    </div>
+
+    <script>
+        function verificarCampos() {
+            var nome = document.getElementById('userNome').value;
+            var email = document.getElementById('userEmail').value;
+            var idioma = document.getElementById('userIdioma').value;
+            var genero = document.getElementById('userGenero').value;
+
+            if (nome === '' || email === '' || idioma === '' || genero === '') {
+                alert('Por favor, preencha todos os campos.');
+            }else{
+                window.location.href="index3.html"
+            }
+        }
+    </script>
+</body>
+</html>

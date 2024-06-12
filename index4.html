@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="1.js" defer></script>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Informações a serem adicionadas</h1>
+        <hr class="separator">
+        <form class="form">
+            <div class="form-group">
+                <label class="label">Título:</label>
+                <input type="text" id="userInput1" class="input-field" placeholder="Título">
+            </div>
+            <div class="form-group">
+                <label class="label">Autor:</label>
+                <input type="text" id="userInput2" class="input-field" placeholder="Autor">
+            </div>
+            <div class="form-group">
+                <label class="label">Lançamento:</label>
+                <input type="text" id="userInput3" class="input-field" placeholder="Lançamento">
+            </div>
+            <div class="form-group">
+                <label class="label">Página marcada:</label>
+                <input type="text" id="userInput4" class="input-field" placeholder="Página marcada">
+            </div>
+            <div class="form-group">
+                <label class="label">Gênero:</label>
+                <input type="text" id="userInput5" class="input-field" placeholder="Gênero">
+            </div>
+            <button onclick="saveAndRedirect()" class="button">Adicionar a Tabela</button>
+        </form>
+    </div>
+
+    <script>
+        function saveAndRedirect() {
+            event.preventDefault();
+            var input1 = document.getElementById("userInput1").value;
+            var input2 = document.getElementById("userInput2").value;
+            var input3 = document.getElementById("userInput3").value;
+            var input4 = document.getElementById("userInput4").value;
+            var input5 = document.getElementById("userInput5").value;
+    
+            // Obtém os dados existentes no localStorage
+            var existingEntries = JSON.parse(localStorage.getItem('tableData')) || [];
+    
+            // Adiciona os novos dados
+            existingEntries.push({ input1, input2, input3, input4, input5 });
+    
+            // Salva de volta no localStorage
+            localStorage.setItem('tableData', JSON.stringify(existingEntries));
+    
+            // Redireciona para a página da tabela
+            window.location.href="index3.html"
+        }
+        </script>
+</body>
+</html>
